@@ -1,0 +1,27 @@
+{
+  "name": "teachable-takehome",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "prop-types": "^15.5.8",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "express": "^4.15.4",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.5.0",
+    "eslint-plugin-prettier": "^2.2.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-react": "^7.3.0",
+    "prettier": "^1.6.1",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.13"
+  },
+  "scripts": {
+    "start": "PORT=8080 react-scripts start | node ./api",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
