@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap": "^3.3.7",
+    "express": "^4.15.4",
     "prop-types": "^15.5.8",
     "react": "^15.6.1",
+    "react-bootstrap": "^0.31.2",
     "react-dom": "^15.6.1",
-    "express": "^4.15.4",
     "request": "^2.81.0"
   },
   "devDependencies": {
