@@ -15,6 +15,7 @@ class App extends Component {
 
   submitQuery = query => {
     GemApi.search(query).then(gems => {
+      this.setState({ gems });
       console.log(gems);
     });
   };
@@ -71,6 +72,47 @@ class App extends Component {
                   </span>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-6 center-block">
+              <h2>Search Results</h2>
+              <ol>
+                {this.state.gems.map(gem => {
+                  return (
+                    <li>
+                      <div className="gem">
+                        <h3>
+                          <a href="`${gem.homepage_uri}`">{gem.name}</a>
+                        </h3>
+                        <p className="description">{gem.info}</p>
+                        <div>
+                          <h4>Dependencies</h4>
+                          <ol>
+                            {gem.dependencies.development ? (
+                              gem.dependencies.development.map(dev => {
+                                return (
+                                  <li>
+                                    <a
+                                      href={
+                                        "https://rubygems.org/gems/" + dev.name
+                                      }
+                                    >
+                                      {dev.name}
+                                    </a>
+                                  </li>
+                                );
+                              })
+                            ) : (
+                              ""
+                            )}
+                          </ol>
+                        </div>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ol>
             </div>
           </div>
         </div>
