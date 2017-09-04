@@ -81,32 +81,38 @@ class App extends Component {
                 {this.state.gems.map(gem => {
                   return (
                     <li>
-                      <div className="gem">
-                        <h3>
-                          <a href="`${gem.homepage_uri}`">{gem.name}</a>
-                        </h3>
-                        <p className="description">{gem.info}</p>
-                        <div>
-                          <h4>Dependencies</h4>
-                          <ol>
-                            {gem.dependencies.development ? (
-                              gem.dependencies.development.map(dev => {
-                                return (
-                                  <li>
-                                    <a
-                                      href={
-                                        "https://rubygems.org/gems/" + dev.name
-                                      }
-                                    >
-                                      {dev.name}
-                                    </a>
-                                  </li>
-                                );
-                              })
-                            ) : (
-                              ""
-                            )}
-                          </ol>
+                      <div className="gem panel panel-default">
+                        <div className="panel-heading">
+                          <h3>
+                            <a href={gem.homepage_uri}>{gem.name}</a>
+                          </h3>
+                        </div>
+                        <div className="panel-body">
+                          <p className="description">{gem.info}</p>
+                          {gem.dependencies.development.length ? (
+                            <div>
+                              <h4>Dependencies</h4>
+                              <ul className="list-group">
+                                {gem.dependencies.development.map(dev => {
+                                  return (
+                                    <li className="list-group-item">
+                                      <a
+                                        href={
+                                          "https://rubygems.org/gems/" +
+                                          dev.name
+                                        }
+                                        target="_blank"
+                                      >
+                                        {dev.name}
+                                      </a>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            </div>
+                          ) : (
+                            ""
+                          )}
                         </div>
                       </div>
                     </li>
