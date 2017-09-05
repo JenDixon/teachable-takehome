@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import Search from "./Search";
+import SearchResults from "./SearchResults";
 import * as GemApi from "./GemApi";
 
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
   saveToFavorites = gem => {
     let favorites = [...this.state.favorites];
     favorites.push(gem);
+    console.log(favorites);
     this.setState({
       favorites
     });
@@ -52,13 +54,14 @@ class App extends Component {
   };
 
   handleFavorites = gem => {
+    console.log(gem);
     let favorites = this.loadFavorites();
     if (favorites && favorites.includes(gem)) {
-      console.log("remove " + favorites);
       this.removeFromFavorites(gem);
+      console.log("remove " + favorites);
     } else {
-      console.log("add " + favorites);
       this.saveToFavorites(gem);
+      console.log("add " + favorites);
     }
   };
 
@@ -95,74 +98,11 @@ class App extends Component {
           <div className="row">
             <div className="col-lg-6 center-block">
               {this.state.gems.length ? <h2>Search Results</h2> : ""}
-              <ol>
-                {this.state.gems.map(gem => {
-                  return (
-                    <li>
-                      <div className="gem panel panel-default">
-                        <div className="panel-heading">
-                          <h3>
-                            <a href={gem.homepage_uri} data-id={gem.name}>
-                              {gem.name}
-                            </a>
-                            <button
-                              type="button"
-                              className="btn btn-default"
-                              aria-label="Left Align"
-                              onClick={event => {
-                                event.preventDefault();
-                                this.handleFavorites(
-                                  event.currentTarget.previousSibling.dataset.id
-                                );
-                              }}
-                            >
-                              <i
-                                className={
-                                  this.state.favorites.includes(gem.name) ? (
-                                    "fa fa-heart"
-                                  ) : (
-                                    "fa fa-heart-o"
-                                  )
-                                }
-                                aria-hidden="true"
-                              />
-                            </button>
-                          </h3>
-                        </div>
-                        <div className="panel-body">
-                          <p className="description">{gem.info}</p>
-                          {gem.dependencies.development.length ? (
-                            <div className="dependencies">
-                              <h4>
-                                Development Dependencies ({gem.dependencies.development.length})
-                              </h4>
-                              <ul className="list-group">
-                                {gem.dependencies.development.map(dev => {
-                                  return (
-                                    <li className="list-group-item">
-                                      <a
-                                        href={
-                                          "https://rubygems.org/gems/" +
-                                          dev.name
-                                        }
-                                        target="_blank"
-                                      >
-                                        {dev.name}
-                                      </a>
-                                    </li>
-                                  );
-                                })}
-                              </ul>
-                            </div>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ol>
+              <SearchResults
+                onFavoriteChange={this.handleFavorites}
+                gems={this.state.gems}
+                favorites={this.state.favorites}
+              />
             </div>
           </div>
         </div>

@@ -32,6 +32,10 @@ input.form-control {
   float: none;
 }
 
+.panel-heading button {
+  float: right;
+}
+
 .panel-body .dependencies {
   margin-top: 20px;
 }
