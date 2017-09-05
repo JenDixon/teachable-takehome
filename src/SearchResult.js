@@ -1,6 +1,11 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class SearchResult extends Component {
+	static PropTypes = {
+		handleFavoriteChange: PropTypes.func.isRequired
+	};
+
 	handleFavoriteChange = gem => {
 		this.props.handleFavoriteChange(gem);
 	};

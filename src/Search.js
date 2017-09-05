@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import * as GemApi from "./GemApi";
+import PropTypes from "prop-types";
 
 class Search extends Component {
+  static PropTypes = {
+    updateQuery: PropTypes.func.isRequired,
+    handleQuerySubmit: PropTypes.func.isRequired
+  };
+
   state = {
     query: ""
   };

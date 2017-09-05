@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import Search from "./Search";
 import SearchResult from "./SearchResult";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 class SearchContainer extends Component {
+	static PropTypes = {
+		onFavoriteChange: PropTypes.func.isRequired,
+		onQuerySubmit: PropTypes.func.isRequired
+	};
+
 	onFavoriteChange = gem => {
 		this.props.onFavoriteChange(gem);
 	};

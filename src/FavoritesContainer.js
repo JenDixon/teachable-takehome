@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import SearchResult from "./SearchResult";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 class FavoritesContainer extends Component {
+	static PropTypes = {
+		handleFavoriteChange: PropTypes.func.isRequired
+	};
+
 	handleFavoriteChange = gem => {
 		this.props.onFavoriteChange(gem);
 	};
