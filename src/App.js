@@ -5,13 +5,8 @@ import * as GemApi from "./GemApi";
 
 class App extends Component {
   state = {
-    query: "",
     gems: [],
     favorites: []
-  };
-
-  updateQuery = query => {
-    this.setState({ query });
   };
 
   submitQuery = query => {
@@ -94,31 +89,7 @@ class App extends Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-6 center-block">
-              <div className="content">
-                <h1>Find Ruby Gems</h1>
-                <div className="input-group input-group-lg">
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={this.state.query}
-                    placeholder="Search for..."
-                    onChange={event => {
-                      this.updateQuery(event.target.value);
-                    }}
-                  />
-                  <span className="input-group-btn">
-                    <button
-                      className="btn btn-default"
-                      type="button"
-                      onClick={() => {
-                        this.submitQuery(this.state.query);
-                      }}
-                    >
-                      Go!
-                    </button>
-                  </span>
-                </div>
-              </div>
+              <Search onQuerySubmit={this.submitQuery} />
             </div>
           </div>
           <div className="row">
