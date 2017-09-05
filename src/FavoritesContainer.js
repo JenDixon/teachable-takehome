@@ -18,6 +18,7 @@ class FavoritesContainer extends Component {
 		let favoriteResults = favoriteResultObjects.map(gem => {
 			return (
 				<SearchResult
+					key={gem.name}
 					handleFavoriteChange={this.handleFavoriteChange}
 					gem={gem}
 					favorites={favorites}
@@ -34,8 +35,8 @@ class FavoritesContainer extends Component {
 						</div>
 						<div id="navbar" className="collapse navbar-collapse">
 							<ul className="nav navbar-nav">
-								<li>
-									<Link exact to="/" className="active">
+								<li key="search">
+									<Link to="/" className="active">
 										Search
 									</Link>
 								</li>
@@ -47,7 +48,11 @@ class FavoritesContainer extends Component {
 					<div className="row">
 						<div className="col-lg-6 center-block">
 							<h2>Favorites</h2>
-							<ol>{favoriteResults}</ol>
+							{favoriteResults.length ? (
+								<ol>{favoriteResults}</ol>
+							) : (
+								<h3>No favorites available</h3>
+							)}
 						</div>
 					</div>
 				</div>

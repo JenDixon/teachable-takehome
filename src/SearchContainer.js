@@ -17,6 +17,7 @@ class SearchContainer extends Component {
 		let searchResults = gems.map(gem => {
 			return (
 				<SearchResult
+					key={gem.name}
 					handleFavoriteChange={this.onFavoriteChange}
 					gem={gem}
 					favorites={favorites}
@@ -32,7 +33,7 @@ class SearchContainer extends Component {
 						</div>
 						<div id="navbar" className="collapse navbar-collapse">
 							<ul className="nav navbar-nav">
-								<li>
+								<li key="favorite">
 									<Link to="/favorites" className="active">
 										Favorites
 									</Link>
@@ -51,7 +52,11 @@ class SearchContainer extends Component {
 						{gems.length ? (
 							<div className="col-lg-6 center-block">
 								<h2>Search Results</h2>
-								<ol>{searchResults}</ol>
+								{searchResults.length ? (
+									<ol>{searchResults}</ol>
+								) : (
+									<h3>No gems available</h3>
+								)}
 							</div>
 						) : (
 							""
