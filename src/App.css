@@ -1,0 +1,42 @@
+.content {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 60px;
+  font-weight: 200;
+  line-height: 1.5em;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+h3 {
+  margin-top: 0;
+}
+
+p {
+  font-size: 16px;
+}
+
+ol {
+  list-style: none;
+  padding-left: 0;
+}
+
+input.form-control {
+  font-style: italic;
+}
+
+.center-block {
+  float: none;
+}
+
+.panel-heading button {
+  float: right;
+}
+
+.panel-body .dependencies {
+  margin-top: 20px;
+}
+
