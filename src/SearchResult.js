@@ -7,13 +7,29 @@ class SearchResult extends Component {
 
 	render() {
 		const { gem, favorites } = this.props;
+		let dependencies = gem.dependencies.development.map(dev => {
+			return (
+				<li key={dev.name} className="list-group-item">
+					<a
+						href={"https://rubygems.org/gems/" + dev.name}
+						target="_blank"
+					>
+						{dev.name}
+					</a>
+				</li>
+			);
+		});
 
 		return (
-			<li>
+			<li key={gem.name}>
 				<div className="gem panel panel-default">
 					<div className="panel-heading">
 						<h3>
-							<a href={gem.homepage_uri} data-id={gem.name}>
+							<a
+								href={gem.homepage_uri}
+								data-id={gem.name}
+								target="_blank"
+							>
 								{gem.name}
 							</a>
 							<button
@@ -47,23 +63,7 @@ class SearchResult extends Component {
 								<h4>
 									Development Dependencies ({gem.dependencies.development.length})
 								</h4>
-								<ul className="list-group">
-									{gem.dependencies.development.map(dev => {
-										return (
-											<li className="list-group-item">
-												<a
-													href={
-														"https://rubygems.org/gems/" +
-														dev.name
-													}
-													target="_blank"
-												>
-													{dev.name}
-												</a>
-											</li>
-										);
-									})}
-								</ul>
+								<ul className="list-group">{dependencies}</ul>
 							</div>
 						) : (
 							""
