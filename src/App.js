@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Header from "./Header";
-import Search from "./Search";
-import SearchResults from "./SearchResults";
+import { Route } from "react-router-dom";
+import SearchContainer from "./SearchContainer";
+import FavoritesContainer from "./FavoritesContainer";
 import * as GemApi from "./GemApi";
 
 class App extends Component {
@@ -13,7 +13,6 @@ class App extends Component {
   submitQuery = query => {
     GemApi.search(query).then(gems => {
       this.setState({ gems });
-      console.log(gems);
     });
   };
 
@@ -29,7 +28,6 @@ class App extends Component {
   saveToFavorites = gem => {
     let favorites = [...this.state.favorites];
     favorites.push(gem);
-    console.log(favorites);
     this.setState({
       favorites
     });
@@ -54,58 +52,37 @@ class App extends Component {
   };
 
   handleFavorites = gem => {
-    console.log(gem);
     let favorites = this.loadFavorites();
     if (favorites && favorites.includes(gem)) {
       this.removeFromFavorites(gem);
-      console.log("remove " + favorites);
     } else {
       this.saveToFavorites(gem);
-      console.log("add " + favorites);
     }
   };
 
   render() {
     return (
       <div className="app">
-        <nav className="navbar navbar-inverse">
-          <div className="container">
-            <div className="navbar-header">
-              <span className="navbar-brand">Project name</span>
-            </div>
-            <div id="navbar" className="collapse navbar-collapse">
-              <ul className="nav navbar-nav">
-                <li className="active">
-                  <a href="#">Home</a>
-                </li>
-                <li>
-                  <a href="#about">About</a>
-                </li>
-                <li>
-                  <a href="#contact">Contact</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-lg-6 center-block">
-              <Search onQuerySubmit={this.submitQuery} />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-6 center-block">
-              {this.state.gems.length ? <h2>Search Results</h2> : ""}
-              <SearchResults
-                onFavoriteChange={this.handleFavorites}
-                gems={this.state.gems}
-                favorites={this.state.favorites}
-              />
-            </div>
-          </div>
-        </div>
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <SearchContainer
+              {...this.state}
+              onFavoriteChange={this.handleFavorites}
+              onQuerySubmit={this.submitQuery}
+            />
+          )}
+        />
+        <Route
+          path="/favorites"
+          render={() => (
+            <FavoritesContainer
+              {...this.state}
+              onFavoriteChange={this.handleFavorites}
+            />
+          )}
+        />
       </div>
     );
   }
